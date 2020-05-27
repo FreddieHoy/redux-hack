@@ -4,14 +4,18 @@ class FactForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      fact: ''
+      fact: '',
+      source: ''
     };
     this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
+
+  // Add an OnSubmit
 
   render() {
     return (
@@ -24,6 +28,15 @@ class FactForm extends Component {
               type="text"
               name="fact"
               value={this.state.fact}
+              onChange={this.handleChange}
+            />
+          </div>
+          <div>
+            <label>Add fact source: </label>
+            <input
+              type="text"
+              name="source"
+              value={this.state.source}
               onChange={this.handleChange}
             />
           </div>

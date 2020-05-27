@@ -8,10 +8,24 @@ class Facts extends Component {
     };
   }
 
+  componentWillMount() {
+    fetch('https://uselessfacts.jsph.pl/random.json?language=en')
+      .then((res) => res.json())
+      .then((data) => {
+        this.setState({ facts: [{ text: data.text, source: data.source }] });
+      });
+  }
+
   render() {
     return (
       <div>
         <h1>Facts</h1>
+        {this.state.facts.map((fact) => (
+          <div>
+            <h3>{fact.source}</h3>
+            <p>{fact.text}</p>
+          </div>
+        ))}
       </div>
     );
   }
