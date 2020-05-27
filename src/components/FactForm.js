@@ -8,7 +8,6 @@ class FactForm extends Component {
       source: ''
     };
     this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(e) {

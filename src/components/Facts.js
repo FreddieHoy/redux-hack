@@ -1,26 +1,16 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { fetchFact } from '../actions/postActions';
 
 class Facts extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      facts: []
-    };
-  }
-
   componentWillMount() {
-    fetch('https://uselessfacts.jsph.pl/random.json?language=en')
-      .then((res) => res.json())
-      .then((data) => {
-        this.setState({ facts: [{ text: data.text, source: data.source }] });
-      });
+    this.props.fetchFact();
   }
-
   render() {
     return (
       <div>
         <h1>Facts</h1>
-        {this.state.facts.map((fact) => (
+        {this.props.facts.map((fact) => (
           <div>
             <h3>{fact.source}</h3>
             <p>{fact.text}</p>
@@ -31,4 +21,11 @@ class Facts extends Component {
   }
 }
 
-export default Facts;
+const mapStateToProps = (state) => {
+  console.log('state', state);
+  return {
+    facts: state.facts.items
+  };
+};
+
+export default connect(mapStateToProps, { fetchFact })(Facts);
