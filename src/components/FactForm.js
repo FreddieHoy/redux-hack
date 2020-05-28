@@ -1,32 +1,45 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { createFact } from '../actions/postActions';
+import PropTypes from 'prop-types';
 
 class FactForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      fact: '',
+      text: '',
       source: ''
     };
     this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
 
-  // Add an OnSubmit
+  handleSubmit(e) {
+    e.preventDefault();
+
+    const fact = {
+      text: this.state.text,
+      source: this.state.source
+    };
+
+    this.props.createFact(fact);
+  }
 
   render() {
     return (
       <div>
         <h1>Add new post</h1>
-        <form>
+        <form onSubmit={this.handleSubmit}>
           <div>
             <label>Add new fact: </label>
             <input
               type="text"
-              name="fact"
-              value={this.state.fact}
+              name="text"
+              value={this.state.text}
               onChange={this.handleChange}
             />
           </div>
@@ -46,4 +59,8 @@ class FactForm extends Component {
   }
 }
 
-export default FactForm;
+FactForm.propTypes = {
+  createFact: PropTypes.func.isRequired
+};
+
+export default connect(null, { createFact })(FactForm);

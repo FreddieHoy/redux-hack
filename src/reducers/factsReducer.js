@@ -12,6 +12,11 @@ export default function (state = intialState, action) {
         ...state,
         items: action.payload
       };
+    case NEW_FACT:
+      return {
+        ...state,
+        item: action.payload
+      };
     default:
       return state;
   }

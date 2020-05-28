@@ -1,6 +1,8 @@
 import { combineReducers } from 'redux';
-import writeFactReducer from './writeFactReducer';
+import factsReducer from './factsReducer';
 
-export default combineReducers({
-  facts: writeFactReducer
+const factsApp = combineReducers({
+  facts: factsReducer
 });
+
+export default factsApp;
